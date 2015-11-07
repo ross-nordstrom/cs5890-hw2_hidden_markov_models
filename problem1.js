@@ -1,10 +1,8 @@
 var _ = require('underscore');
 
-var pos = ['N', 'V', 'Aux', 'Det', 'Adv', 'Pro', 'Prep', 'Punc'];
+var pos = [/*start:*/undefined, 'N', 'V', 'Aux', 'Det', 'Adv', 'Pro', 'Prep', 'Punc'];
 var posLUT = _.object(_.map(pos, function(v,i) { return [v,i]; }));
 
-var outputs = _.mapObject(posLUT, _.constant({}));
-var transitions = _.map(pos, _.constant([]));
 var sents = [
 'Boy/N meets/V girl/N ./Punc', 
 'Boy/N runs/V ./Punc', 
@@ -20,3 +18,25 @@ var sents = [
 'Boy/N can/Aux eat/V from/Prep can/N ./Punc'
 ];
 
+function analyzeSentences(sents) {
+  var outputs = _.mapObject(posLUT, _.constant({}));
+  var transitions = _.map(pos, _.constant([]));
+  
+  _.each(sents, function analyzeSentence(s) {
+    
+    _.reduce(s.split(' '), function analyzeWordAndTransition(memo, w) {
+      var parts = w.split('/');
+      var word = parts[0]; var tag = parts[1];
+      
+      outputs[tag] = (outputs[tag] || 0) + 1;
+      
+      fromIdx = posLUT[memo.from]; toIdx = posLUT[tag];
+      transitions[fromIdx][toIdx] = (transitions[fromIdx][toIdx] || 0) + 1;
+      
+      return _.extend(memo, {from: tag});
+    }, {});
+  
+  });
+  
+  return {outputs: outputs, transitions: transitions};
+}
