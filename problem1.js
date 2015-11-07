@@ -18,17 +18,18 @@ var sents = [
 'Boy/N can/Aux eat/V from/Prep can/N ./Punc'
 ];
 
-function analyzeSentences(sents) {
-  var outputs = _.mapObject(posLUT, _.constant({}));
+function parseSentences(sents) {
+  var outputs = _.mapObject(posLUT, _.constant({_total: 0}));
   var transitions = _.map(pos, _.constant([]));
   
-  _.each(sents, function analyzeSentence(s) {
+  _.each(sents, function parseSentence(s) {
     
-    _.reduce(s.split(' '), function analyzeWordAndTransition(memo, w) {
+    _.reduce(s.split(' '), function parseWordAndTransition(memo, w) {
       var parts = w.split('/');
       var word = parts[0]; var tag = parts[1];
       
-      outputs[tag] = (outputs[tag] || 0) + 1;
+      outputs[tag][word] = (outputs[tag][word] || 0) + 1;
+      outputs[tag]._total++;
       
       fromIdx = posLUT[memo.from]; toIdx = posLUT[tag];
       transitions[fromIdx][toIdx] = (transitions[fromIdx][toIdx] || 0) + 1;
