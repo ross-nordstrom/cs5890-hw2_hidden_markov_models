@@ -47,13 +47,10 @@ if (argv.help) {
     labeledData = partitioned[0];
     var unlabeledData = partitioned[1];
 
-    console.log("Partitioning:");
-    console.log("Labeled\t=> " + _.size(labeledData));
-    console.log("Unlbled\t=> " + _.size(unlabeledData));
-
-    var hmm = HMM(unlabeledData, labeledData);
-    hmm.parse();
-    hmm.print();
+    HMM(unlabeledData, labeledData)
+        .parse()
+        .analyze()
+        .print();
 
     process.exit(1);
 }

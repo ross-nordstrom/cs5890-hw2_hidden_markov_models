@@ -21,7 +21,7 @@ Meet/V the/Det duck/N ./Punc
 The/Det boy/N is/V on/Prep the/Det can/N ./Punc
 See/V the/Det flies/N ./Punc
 The/Det woman/N is/V on/Prep time/N ./Punc
-You/Pro see/Verb ./Punc
+You/Pro see/V ./Punc
 The/Det ducks/N fly/V ./Punc
 The/Det boy/N flies/V to/Prep meet/V the/Det girl/N ./Punc
 Man/N ,/Punc women/N like/V ducks/N ./Punc
@@ -59,7 +59,7 @@ See/V me/Pro run/V ./Punc
 The/Det ducks/N walk/V on/Prep the/Det saw/N ./Punc
 The/Det boy/N ran/V to/Prep the/Det meeting/N ./Punc
 Time/N flies/V ./Punc
-I/Prop met/V a/Det girl/V ./Punc
+I/Pro met/V a/Det girl/V ./Punc
 A/Det girl/N has/Aux ducked/V me/Pro ./Punc
 I/Pro like/V women/N ./Punc
 You/Pro like/V men/N ./Punc
