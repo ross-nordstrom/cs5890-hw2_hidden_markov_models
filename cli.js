@@ -72,9 +72,10 @@ if (argv.help) {
     }
     console.log(clc.bold.cyan("Results from " + num + " iterations of the HMM:"));
     console.log("\nPrecisions (freq by val): " + JSON.stringify(_.countBy(precisions.sort().reverse()), null, 2));
-    console.log("\nMean: " + precisions.reduce(add).toFixed(2) +
-        ",  Min: " + _.min(precisions).toFixed(2) +
-        ",  Max: " + _.max(precisions).toFixed(2));
+    var mean = precisions.reduce(add) / num;
+    console.log("\nMean: " + clc.cyan(mean.toFixed(2)) + "," +
+        "  Min: " + clc.red(_.min(precisions).toFixed(2)) + "," +
+        "  Max: " + clc.green(_.max(precisions).toFixed(2)));
 
 
     process.exit(1);
