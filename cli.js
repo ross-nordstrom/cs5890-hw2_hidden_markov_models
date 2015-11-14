@@ -22,7 +22,7 @@ var options = {
     },
     default: {
         verbose: false,
-        in: './data/sample',
+        in: './data/full',
         ratio: 1.0
     }
 };
