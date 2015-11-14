@@ -23,7 +23,7 @@ var options = {
     default: {
         verbose: false,
         in: './data/full',
-        ratio: 1.0
+        ratio: 0.9
     }
 };
 
@@ -40,17 +40,17 @@ if (argv.help) {
     var dir = argv.in;
     var ratio = argv.ratio || 1.0;
 
-    var labeledData = cliHelper.fileContent([dir, 'labeled.txt'].join('/')).split('\n');
+    var labeledData = cliHelper.fileContent([dir, 'labeled.txt'].join('/')).trim().split('\n');
     //var unlabeledData = cliHelper.fileContent([dir, 'unlabeled.txt'].join('/')).split('\n');
 
     var partitioned = _.partition(_.shuffle(labeledData), cliHelper.inRange(0, ratio * _.size(labeledData)));
-    labeledData = partitioned[0];
-    var unlabeledData = partitioned[1];
+    var trainData = partitioned[0];
+    var testData = partitioned[1];
 
-    HMM(unlabeledData, labeledData)
+    HMM(trainData, testData)
         .parse()
-        .analyze()
-        .print();
+        .print()
+        .test();
 
     process.exit(1);
 }
