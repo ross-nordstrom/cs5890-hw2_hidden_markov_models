@@ -1,0 +1,91 @@
+Boy/N meets/V girl/N ./Punc
+Boy/N runs/V ./Punc
+Girl/N runs/V ./Punc
+Time/N flies/V ./Punc
+Time/N flies/V like/Adv an/Det arrow/N ./Punc
+Boy/N is/Aux running/V ./Punc
+Run/V ./Punc
+Run/V ,/Punc boy/N ./Punc
+Boys/N can/Aux run/V ./Punc
+Boys/N will/Aux eat/V ./Punc
+Boy/N saw/V girl/N duck/V ./Punc
+Boy/N can/Aux eat/V from/Prep can/N ./Punc
+The/Det duck/N ducks/V ./Punc
+The/Det ducks/N duck/V ./Punc
+The/Det flies/N fly/V from/Prep the/Det duck/N ./Punc
+I/Pro like/V meeting/V girls/N ./Punc
+The/Det Arrow/N can/Aux run/V ./Punc
+The/Det boy/N can/Aux run/V from/Prep time/N ./Punc
+Girls/N like/V me/Pro ./Punc
+Meet/V the/Det duck/N ./Punc
+The/Det boy/N is/V on/Prep the/Det can/N ./Punc
+See/V the/Det flies/N ./Punc
+The/Det woman/N is/V on/Prep time/N ./Punc
+You/Pro see/Verb ./Punc
+The/Det ducks/N fly/V ./Punc
+The/Det boy/N flies/V to/Prep meet/V the/Det girl/N ./Punc
+Man/N ,/Punc women/N like/V ducks/N ./Punc
+A/Det duck/N will/Aux like/V a/Det girl/N ./Punc
+The/Det arrow/N is/V a/Det girl/N ./Punc
+I/Pro saw/V your/Pro duck/N ./Punc
+I/Pro fly/V like/Aux a/Det duck/N ./Punc
+Running/V to/Prep meet/V a/Det fly/N ./Punc
+Time/N is/Aux running/V from/Prep time/N ./Punc
+Boys/N meet/V ducks/N ./Punc
+Girl/N sees/V duck/N ./Punc
+I/Pro like/V your/Pro duck/N ./Punc
+The/Det man/N runs/V like/Aux a/Det woman/N ./Punc
+The/Det fly/N flies/V like/Aux a/Det duck/N ./Punc
+The/Det duck/N likes/V the/Det girl/N ./Punc
+The/Det man/N ducked/V from/Prep the/Det arrow/N ./Punc
+Girl/N will/Aux see/V boy/N ./Punc
+The/Det boy/N saw/V women/N ./Punc
+The/Det men/N saw/V men/N ./Punc
+Boy/N has/Aux liking/V of/Pro women/N ./Punc
+Boy/N is/Aux meeting/V girl/N ./Punc
+Girl/N met/V ducks/N ./Punc
+I/Pro ran/V ./Punc
+My/Pro duck/N ./Punc
+I/Pro run/V to/Prep the/Det duck/N ./Punc
+I/N met/V you/Pro ./Punc
+You/Pro will/Aux can/V /N me/Pro ./Punc
+The/Det boy/Det can/V ./Punc
+The/Det girl/N likes/V arrows/N ./Punc
+I/Pro see/V flies/N ./Punc
+My/Det boy/N met/V a/Det duck/N ./Punc
+You/Pro are/Aux a/Det duck/N ./Punc
+Duck/V !/Punc
+See/V me/Pro run/V ./Punc
+The/Det ducks/N walk/V on/Prep the/Det saw/N ./Punc
+The/Det boy/N ran/V to/Prep the/Det meeting/N ./Punc
+Time/N flies/V ./Punc
+I/Prop met/V a/Det girl/V ./Punc
+A/Det girl/N has/Aux ducked/V me/Pro ./Punc
+I/Pro like/V women/N ./Punc
+You/Pro like/V men/N ./Punc
+Men/N like/V men/N ./Punc
+Women/N like/V women/N ./Punc
+I/Pro am/Aux seeing/V arrows/N fly/V ./Punc
+I/Pro ran/V from/Prep the/Det arrow/N ./Punc
+The/Det girl/N flies/V to/Prep you/Pro ./Punc
+I/Pro fly/V ./Punc
+Girl/N is/Aux running/V ./Punc
+I/Pro can/Aux meet/V you/Pro ./Punc
+Girl/N is/Aux seeing/V me/Pro ./Punc
+Time/N ducks/V ./Punc
+Woman/N is/Aux running/V from/Prep man/N ./Punc
+Boy/N will/Aux like/V girl/N ./Punc
+You/Pro can/Aux like/V my/Pro duck/N ./Punc
+Man/N saw/V a/Det duck/N ./Punc
+Girl/N has/V an/Det arrow/N ./Punc
+Women/N liked/V my/Pro ducks/N ./Punc
+Duck/N meets/V duck/N ./Punc
+Boy/N runs/V to/Prep duck/N ./Punc
+Girl/N ducks/V ./Punc
+Duck/N flies/V ./Punc 
+Time/N flies/V like/Adv a/Det duck/N ./Punc
+Duck/N is/Aux running/V ./Punc
+The/Det duck/N ducked/V ./Punc
+Eat/V ,/Punc duck/N ./Punc
+Duck/V ,/Punc boy/N ./Punc
+Duck/N eats/V boy/N ./Punc
