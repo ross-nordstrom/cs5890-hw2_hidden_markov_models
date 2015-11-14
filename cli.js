@@ -17,11 +17,13 @@ var options = {
     alias: {
         help: ['h'],
         verbose: ['v'],
-        in: ['i']
+        in: ['i'],
+        ratio: ['r']
     },
     default: {
+        verbose: false,
         in: './data/sample',
-        verbose: false
+        ratio: 1.0
     }
 };
 
@@ -36,9 +38,18 @@ if (argv.help) {
 
     // Step 1.
     var dir = argv.in;
+    var ratio = argv.ratio || 1.0;
 
-    var unlabeledData = cliHelper.fileContent([dir, 'unlabeled.txt'].join('/')).split('\n');
     var labeledData = cliHelper.fileContent([dir, 'labeled.txt'].join('/')).split('\n');
+    //var unlabeledData = cliHelper.fileContent([dir, 'unlabeled.txt'].join('/')).split('\n');
+
+    var partitioned = _.partition(_.shuffle(labeledData), cliHelper.inRange(0, ratio * _.size(labeledData)));
+    labeledData = partitioned[0];
+    var unlabeledData = partitioned[1];
+
+    console.log("Partitioning:");
+    console.log("Labeled\t=> " + _.size(labeledData));
+    console.log("Unlbled\t=> " + _.size(unlabeledData));
 
     var hmm = HMM(unlabeledData, labeledData);
     hmm.parse();
