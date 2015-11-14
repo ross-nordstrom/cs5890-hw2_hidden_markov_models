@@ -1,4 +1,4 @@
-CS 5890 - Hidden Markov Models 
+CS 5890 - Hidden Markov Models
 ================================
 
     Ross Nordstrom
@@ -29,4 +29,30 @@ rdnHmm --help
 ```sh
 npm install
 npm test
+```
+
+### Results on "Full" Dataset
+
+```sh
+$ time rdnhmm  -i data/full/ -r .9 -n 10000 -q
+Results from 10000 iterations of the HMM:
+
+Precisions (freq by val): {
+  "1": 163,
+  "0.9": 838,
+  "0.8": 1963,
+  "0.7": 2620,
+  "0.6": 2313,
+  "0.5": 1399,
+  "0.4": 545,
+  "0.3": 127,
+  "0.2": 28,
+  "0.1": 4
+}
+
+Mean: 0.67,  Min: 0.10,  Max: 1.00
+
+real	0m31.544s
+user	0m31.632s
+sys	0m0.097s
 ```
