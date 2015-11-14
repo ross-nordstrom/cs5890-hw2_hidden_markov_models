@@ -102,7 +102,7 @@ Girl/N duck/N ,/Punc duck/V ./Punc
 Boy/N duck/N ,/Punc duck/V ./Punc
 Boy/N duck/N is/Aux running/V ./Punc
 Girl/N duck/N is/Aux running/V ./Punc
-Boy/N duck/N runs to girl/N duck/N ./Punc
-Girl/N duck/N runs to boy/N duck/N ./Punc
+Boy/N duck/N runs/V to/Prep girl/N duck/N ./Punc
+Girl/N duck/N runs/V to/Prep boy/N duck/N ./Punc
 Girl/N duck/N sees/V boy/N duck/N ducking/V ./Punc
 Boy/N duck/N sees/V girl/N duck/N ducking/V ./Punc
