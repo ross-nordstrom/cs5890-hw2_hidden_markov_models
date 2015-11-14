@@ -89,3 +89,20 @@ The/Det duck/N ducked/V ./Punc
 Eat/V ,/Punc duck/N ./Punc
 Duck/V ,/Punc boy/N ./Punc
 Duck/N eats/V boy/N ./Punc
+Boy/N duck/N sees/V girl/N ./Punc
+Boy/N duck/N sees/V boy/N ./Punc
+Boy/N duck/N sees/V girl/N duck/N ./Punc
+Boy/N duck/N sees/V boy/N duck/N ./Punc
+Boy/N duck/N ,/Punc duck/V ./Punc
+Girl/N duck/N sees/V boy/N ./Punc
+Girl/N duck/N sees/V girl/N ./Punc
+Girl/N duck/N sees/V boy/N duck/N ./Punc
+Girl/N duck/N sees/V girl/N duck/N ./Punc
+Girl/N duck/N ,/Punc duck/V ./Punc
+Boy/N duck/N ,/Punc duck/V ./Punc
+Boy/N duck/N is/Aux running/V ./Punc
+Girl/N duck/N is/Aux running/V ./Punc
+Boy/N duck/N runs to girl/N duck/N ./Punc
+Girl/N duck/N runs to boy/N duck/N ./Punc
+Girl/N duck/N sees/V boy/N duck/N ducking/V ./Punc
+Boy/N duck/N sees/V girl/N duck/N ducking/V ./Punc

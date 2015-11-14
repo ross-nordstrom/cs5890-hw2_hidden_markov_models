@@ -70,3 +70,20 @@ The duck ducked.
 Eat, duck.
 Duck, boy
 Duck eats boy. 
+Boy duck sees girl.
+Boy duck sees boy.
+Boy duck sees girl duck.
+Boy duck sees boy duck.
+Boy duck, duck.
+Girl duck sees boy.
+Girl duck sees girl.
+Girl duck sees boy duck.
+Girl duck sees girl duck.
+Girl duck, duck.
+Boy duck, duck.
+Boy duck is running.
+Girl duck is running.
+Boy duck runs to girl duck.
+Girl duck runs to boy duck.
+Girl duck sees boy duck ducking.
+Boy duck sees girl duck ducking.
