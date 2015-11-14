@@ -22,7 +22,7 @@ var options = {
     },
     default: {
         verbose: false,
-        in: './data/full',
+        in: './data/sample',
         ratio: 0.9
     }
 };
@@ -49,8 +49,9 @@ if (argv.help) {
 
     HMM(trainData, testData)
         .parse()
-        .print()
-        .test();
+        .printTrain()
+        .test()
+        .printTest();
 
     process.exit(1);
 }
