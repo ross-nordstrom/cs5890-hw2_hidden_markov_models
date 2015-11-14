@@ -4,8 +4,10 @@ var request = require('superagent');
 var async = require('async');
 var _ = require('underscore');
 var fs = require('fs');
-var cliHelper = require('./lib/cliHelper');
 var natural = require('natural');
+
+var cliHelper = require('./lib/cliHelper');
+var HMM = require('./lib/HMM');
 
 var options = {
     boolean: [
@@ -15,16 +17,10 @@ var options = {
     alias: {
         help: ['h'],
         verbose: ['v'],
-        in: ['i'],
-        cache: ['c'],
-        extension: ['e'],
-        kGrams: ['k']
+        in: ['i']
     },
     default: {
-        in: './data',
-        cache: './cache',
-        extension: 'txt',
-        kGrams: 10,
+        in: './data/sample',
         verbose: false
     }
 };
@@ -40,14 +36,13 @@ if (argv.help) {
 
     // Step 1.
     var dir = argv.in;
-    var cache = argv.cache;
-    var extensions = !argv.extension ? null : argv.extension.split(',').map(function prefixDot(s) {
-        return '.' + s;
-    });
-    var kGrams = argv.kGrams;
 
-    // TODO: Code here...
+    var unlabeledData = cliHelper.fileContent([dir, 'unlabeled.txt'].join('/')).split('\n');
+    var labeledData = cliHelper.fileContent([dir, 'labeled.txt'].join('/')).split('\n');
+
+    var hmm = HMM(unlabeledData, labeledData);
+    hmm.parse();
+    hmm.print();
 
     process.exit(1);
-
 }
