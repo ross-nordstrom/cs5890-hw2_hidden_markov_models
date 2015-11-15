@@ -28,9 +28,8 @@
   University of Colorado - Colorado Springs \\
   1420 Austin Bluffs Pkwy, \\
   Colorado Springs, CO 80918 \\
-  {\tt rnordstr@uccs.edu nordstrom.ross@gmail.com} \\}
-
-\date{November 16, 2015}
+  {\tt rnordstr@uccs.edu nordstrom.ross@gmail.com} \\
+  \textbf{Completed:} November 16, 2015 \\}
 
 \begin{document}
 \maketitle
@@ -158,8 +157,7 @@ With our datastructures defined, the parsing becomes quite simple, as show below
 \State $transitions[prevTag][tag]++ $
 \EndFor
 \EndFor
-\State Normalize the Counts in $outputs$ and $transitions$ to Probs by dividing by the total counts
-\State Our model is $outputs$ and $transitions$
+\State Normalize the Counts in $outputs$ and $transitions$ to Probs by dividing by the total counts. These represent the model.
 \end{algorithmic}
 \end{algorithm}
 
@@ -192,37 +190,88 @@ dataset, and then a CLI-driven evaluation of my implementation against the full 
 
 \subsection{Sample Dataset (Task 1)}
 The sample dataset was parsed by hand with a manual transitions table and output frequency list,
-which was corroborated by the CLI tool.  The hand-drawn model and CLI-produced outputs/transitions
-structures are shown in Figures 1, 2, and 3.
+which was corroborated by the CLI tool.  The hand-drawn model and CLI-produced transitions
+structures are shown in Figures 1, 2, and 3. The output probabilities are listed here.
 
-\begin{figure}[ht!]
+\begin{lstlisting}
+N    {_TOT_:15.00,Time:0.13,arrow:0.07,
+     Boys:0.13,Boy:0.33,boy:0.07,
+     girl:0.13,Girl:0.07,can:0.07}
+V    {_TOT_:13.00,flies:0.15,run:0.08,
+   meets:0.08,saw:0.08,duck:0.08,eat:0.15,
+   Run:0.15,running:0.08,runs:0.15}
+Aux  {_TOT_:4.00,can:0.50,will:0.25,is:0.25}
+Det  {_TOT_:1.00,an:1.00}
+Adv  {_TOT_:1.00,like:1.00}
+Pro  {_TOT_:0.00}
+Prep {_TOT_:1.00,from:1.00}
+Punc {_TOT_:13.00,.:0.92,,:0.08}
+\end{lstlisting}
+
+\begin{figure*}
     \centering
-    \includegraphics[width=90mm]{img/sample_hmm.jpg}
+    \includegraphics[width=\textwidth]{img/sample_hmm.jpg}
     \caption{Hand-drawn HMM model, trained on the sample dataset}
     \label{fig:sampleHmm}
-\end{figure}
+\end{figure*}
 
-\begin{figure}[ht!]
+\begin{figure*}
     \centering
-    \includegraphics[width=90mm]{img/sample_outputs.png}
-    \caption{Output probabilities by tag for sample dataset}
-    \label{fig:sampleHmm_out}
-\end{figure}
-
-\begin{figure}[ht!]
-    \centering
-    \includegraphics[width=90mm]{img/sample_transitions.png}
+    \includegraphics[width=150mm]{img/sample_transitions.png}
     \caption{Transition probabilities for sample dataset}
     \label{fig:sampleHmm_trans}
+\end{figure*}
+
+\clearpage
+%
+%\begin{figure*}
+%    \centering
+%    \includegraphics[width=150mm]{img/sample_outputs.png}
+%    \caption{Output probabilities by tag for sample dataset}
+%    \label{fig:sampleHmm_out}
+%\end{figure*}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{img/histogram_pcnt.png}
+    \caption{A histogram of the precisions found over 10,000 iterations of the full dataset.}
+    \label{fig:hist_freqs}
 \end{figure}
 
 
 
 \subsection{Full Dataset (Tasks 2-3)}
+In analyzing the full dataset, only the labeled file was used (containing 108 tagged sentences).
+The data was then partitioned into 90\% training and 10\% testing data.  After a sample run
+with 10,000 iterations, the a mean tag precision of 80\% was found, shown in more detail in Table 2.
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|l|l l|}
+\hline \bf Precision  & \bf by Sentence & \bf by Tag \\ \hline
+\bf Min  & 0.10 & 0.20 \\
+\bf Mean & \bf 0.67 & \bf 0.80 \\
+\bf Max  & 1.00 & 1.00 \\
+\hline
+\end{tabular}
+\end{center}
+\caption{\label{results} Results after 10,000 iterations on the full dataset. \\
+Here, we show the precision both by sentence as well as by tag.}
+\end{table}
+
+Find a histogram of all results in Figure 4, effectively showing all possible precision for the
+given partitioning ratio.
+
 
 
 \section{Conclusion}
+The Hidden Markov Model approach to modeling and applying sentence tagging is nearly trivial
+to implement, while providing an apparently good precision on a small dataset of roughly
+100 sentences.
 
-
+While no significant challenges were found, the problem of how to appropriately smooth the
+trained probabilites was not robustly dealt with.  This would be an area to apply
+more effort into improving this HMM implementation.
 
 \end{document}
