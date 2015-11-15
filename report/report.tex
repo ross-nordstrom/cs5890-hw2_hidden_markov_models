@@ -1,6 +1,7 @@
 % From https://www.sharelatex.com/templates/journals/acl-2014-paper
 \documentclass[11pt]{article}
 \usepackage{acl2014}
+\usepackage{graphicx}
 \usepackage{times}
 \usepackage{url}
 \usepackage{latexsym}
@@ -190,6 +191,31 @@ The results of the assignment are provided here, first with a hand-drawn HMM mod
 dataset, and then a CLI-driven evaluation of my implementation against the full dataset.
 
 \subsection{Sample Dataset (Task 1)}
+The sample dataset was parsed by hand with a manual transitions table and output frequency list,
+which was corroborated by the CLI tool.  The hand-drawn model and CLI-produced outputs/transitions
+structures are shown in Figures 1, 2, and 3.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=90mm]{img/sample_hmm.jpg}
+    \caption{Hand-drawn HMM model, trained on the sample dataset}
+    \label{fig:sampleHmm}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=90mm]{img/sample_outputs.png}
+    \caption{Output probabilities by tag for sample dataset}
+    \label{fig:sampleHmm_out}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=90mm]{img/sample_transitions.png}
+    \caption{Transition probabilities for sample dataset}
+    \label{fig:sampleHmm_trans}
+\end{figure}
+
 
 
 \subsection{Full Dataset (Tasks 2-3)}
