@@ -50,6 +50,8 @@ if (argv.help) {
     var num = argv.num;
     var quiet = argv.quiet;
 
+    var numTags = [];
+
     var labeledData = cliHelper.fileContent([dir, 'labeled.txt'].join('/')).trim().split('\n');
     //var unlabeledData = cliHelper.fileContent([dir, 'unlabeled.txt'].join('/')).split('\n');
 
@@ -68,6 +70,7 @@ if (argv.help) {
 
         sentencePrecisions.push(hmm.getSentencePrecision());
         tagPrecisions.push(hmm.getTagPrecision());
+        numTags.push(hmm.getTagCount());
     });
 
     if (!quiet) {
@@ -84,7 +87,7 @@ if (argv.help) {
 
     var tagPrecisionHistogram = _.countBy(tagPrecisions.map(round).sort().reverse());
     console.log("\nTag Precisions (freq by val): " + JSON.stringify(tagPrecisionHistogram, null, 2));
-    var tagMean = tagPrecisions.reduce(add) / num;
+    var tagMean = weightedMean(tagPrecisions, numTags);
     console.log("\nMean: " + clc.cyan(tagMean.toFixed(2)) + "," +
         "  Min: " + clc.red(_.min(tagPrecisions).toFixed(2)) + "," +
         "  Max: " + clc.green(_.max(tagPrecisions).toFixed(2)));
@@ -96,12 +99,27 @@ if (argv.help) {
 function add(a, b) {
     return a + b;
 }
+function mult(arr) {
+    return arr.reduce(_mult);
+}
+function _mult(a, b) {
+    return a * b;
+}
 
 function round(x) {
+    return _round(20, x);
+
     return x < 0.6 ? _round(10, x) :
         x < 0.9 ? _round(20, x) :
             _round(100, x);
 }
 function _round(r, x) {
     return Math.round(x * r) / r;
+}
+
+function weightedMean(vals, cnts) {
+    var weightedNum = _.zip(vals, cnts).map(mult).reduce(add);
+    var totalCnt = cnts.reduce(add);
+
+    return weightedNum / totalCnt;
 }
