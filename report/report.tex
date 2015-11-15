@@ -114,7 +114,7 @@ and then uses the parsing and testing modules to evaluate the
 partitioned data. These modules are described in further detail
 below.
 
-\subsection{Parsing Trainig Data}
+\subsection{Parsing Training Data}
 This first step takes a labeled dataset, and parsed out an HMM
 representation of the data.  An HMM is composed of two core structures:
 a map of word probabilities by state (tags), and a table of state (tag)
@@ -139,10 +139,10 @@ For ease of access, the transition table was actually stored as a nested hashmap
 Probabilities, via double mapping of \texttt{FROM\_TAG -> TO\_TAG -> Probability}.
 
 \subsubsection{Parsing Details}
-With our datastructures defined, the parsing becomes quite simple.  The algorithm is show below.
+With our datastructures defined, the parsing becomes quite simple, as show below.
 
 \begin{algorithm}
-\caption{Parsing Labeled Data into HMM}
+\caption{Parsing Labeled Data into HMM}\label{alg:parse}
 \begin{algorithmic}[1]
 \Require $labeledData$, the training data
 \State Initialize $outputs$ as double hashmap
@@ -157,11 +157,42 @@ With our datastructures defined, the parsing becomes quite simple.  The algorith
 \State $transitions[prevTag][tag]++ $
 \EndFor
 \EndFor
-\State Normalize the Counts in $outputs$, $transitions$ to Probs
+\State Normalize the Counts in $outputs$ and $transitions$ to Probs by dividing by the total counts
+\State Our model is $outputs$ and $transitions$
 \end{algorithmic}
 \end{algorithm}
 
+
+\subsection{Testing the HMM via Viterbi}
+Once we've generated an HMM from training data, we then evaluate it by
+tagging testing data (stripped of labels) and comparing the HMM-tagged
+result against the known correct tags.
+
+This portion of the assignment uses the Viterbi algorithm to efficiently
+tag the sentences from the HMM.  The Viterbi algorithm is well-known and
+will not be repeated here.  Let it suffice that the algorithm was implemented
+in this assignment.
+
+One notable addition introduced in our implementation is the idea of "smoothing"
+our parse probabilities.  The need for this arises because it's possible we'll
+see previously unseen words or transitions in the testing data.  We can discard
+previously unseen transitions as a invalid with our model; however, it is useful
+to provide a "small" probability of an unseen word being allowed at a given tag
+state.
+
+Smoothing in this assignment was implemented by using a non-zero "smoothing coefficient"
+as the \texttt{Output Probability} for unknown words.  A coefficient of \texttt{0.0001} was used
+in the evaluation of this assignment.
+
+
 \section{Assignment Results}
+The results of the assignment are provided here, first with a hand-drawn HMM model of the sample
+dataset, and then a CLI-driven evaluation of my implementation against the full dataset.
+
+\subsection{Sample Dataset (Task 1)}
+
+
+\subsection{Full Dataset (Tasks 2-3)}
 
 
 \section{Conclusion}
