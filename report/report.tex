@@ -4,6 +4,14 @@
 \usepackage{times}
 \usepackage{url}
 \usepackage{latexsym}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\algnewcommand\algorithmicforeach{\textbf{for each}}
+\algdef{S}[FOR]{ForEach}[1]{\algorithmicforeach\ #1\ \algorithmicdo}
+
 
 %\setlength\titlebox{5cm}
 
@@ -31,10 +39,133 @@ of the Viterbi algorithm for identifying tags. The results found were passable, 
 dataset used.
 \end{abstract}
 
-\section{Dataset and Approach}
+\section{Dataset}
+The datasets used in this assignment were sentences made up by the Professor and students in the class using a
+provided dictionary of words and small set of POS tags.
 
 \subsection{Sample Professor Dataset}
+The sample dataset was a small set of 12 tagged sentences, motivating the assignment.
 
 \subsection{Full Student Dataset}
+The full student dataset came out to be 108 tagged sentences. Each student submitted a number of sentences for use by
+all. For reference, I added the sentences listed below.
+
+\begin{lstlisting}
+Boy/N duck/N sees/V girl/N ./Punc
+Boy/N duck/N sees/V boy/N ./Punc
+Boy/N duck/N sees/V girl/N duck/N
+  ./Punc
+Boy/N duck/N sees/V boy/N duck/N
+  ./Punc
+Boy/N duck/N ,/Punc duck/V ./Punc
+Girl/N duck/N sees/V boy/N ./Punc
+Girl/N duck/N sees/V girl/N
+  ./Punc
+Girl/N duck/N sees/V boy/N duck/N
+  ./Punc
+Girl/N duck/N sees/V girl/N duck/N
+  ./Punc
+Girl/N duck/N ,/Punc duck/V ./Punc
+Boy/N duck/N ,/Punc duck/V ./Punc
+Boy/N duck/N is/Aux running/V
+  ./Punc
+Girl/N duck/N is/Aux running/V
+  ./Punc
+Boy/N duck/N runs/V to/Prep girl/N
+  duck/N ./Punc
+Girl/N duck/N runs/V to/Prep boy/N
+  duck/N ./Punc
+Girl/N duck/N sees/V boy/N duck/N
+  ducking/V ./Punc
+Boy/N duck/N sees/V girl/N duck/N
+  ducking/V ./Punc
+\end{lstlisting}
+
+\section{Approach}
+
+The assignment was implemented using a {\em Node.js} application exposed as
+a command-line tool, taking in parameters to drive the operation of the
+code. The parameters are described in Table 1.
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline \bf Parameter & \bf Description \\ \hline
+--in (-i)            & Data directory from which \\
+                     & to read OANC data \\
+--in (-i)            & Data directory from which to  \\
+                     & read labeled data \\
+--ratio (-r)         & Ratio of labeled data to learn on \\
+--num (-n)           & Number of times to iterate the \\
+                     & evaluation (each with different \\
+                     & train/test partitioning) \\
+
+\hline
+\end{tabular}
+\end{center}
+\caption{\label{cliParams} Command-line parameters. \\
+These describe the available (optional) parameters when using
+the CLI tool, which all default to reasonable values.}
+\end{table}
+
+A top-level CLI wrapper simply reads in a dataset from a file,
+partitions it into (90%) training data and (10%) testing data,
+and then uses the parsing and testing modules to evaluate the
+partitioned data. These modules are described in further detail
+below.
+
+\subsection{Parsing Trainig Data}
+This first step takes a labeled dataset, and parsed out an HMM
+representation of the data.  An HMM is composed of two core structures:
+a map of word probabilities by state (tags), and a table of state (tag)
+transition probabilities.
+
+The data structures and parsing approach are described below.
+
+\subsubsection{Data Struct: Output Probabilities}
+To store known output probabilities, I simply maintained a
+"hashmap of hashmaps" structure in memory.  While this would be a limitation
+on a very large dataset (one too large to store in memory), it was more
+than adequate for this assignment.
+
+The nested hashmap was simply a double mapping of \texttt{TAG -> WORD -> Probability}.
+
+\subsubsection{Data Struct: Transition Probabilities}
+A transition probability is simply the likelihood of transitioning from tag A to B, given
+we are currently at tag A.  The transitions are represented as a "From\\To"
+table, showing the likelihoods of all possible transitions.
+
+For ease of access, the transition table was actually stored as a nested hashmap, like the Output
+Probabilities, via double mapping of \texttt{FROM\_TAG -> TO\_TAG -> Probability}.
+
+\subsubsection{Parsing Details}
+With our datastructures defined, the parsing becomes quite simple.  The algorithm is show below.
+
+\begin{algorithm}
+\caption{Parsing Labeled Data into HMM}
+\begin{algorithmic}[1]
+\Require $labeledData$, the training data
+\State Initialize $outputs$ as double hashmap
+\State Initialize $transitions$ as double hashmap
+\ForEach {$sentence \in labeledData $}
+\State $parts \gets split(sentence, spaceChar)$
+\ForEach {$part, prevPart \in parts $}
+\State $word \gets part[0] $
+\State $tag \gets part[1] $
+\State $prevTag \gets prevPart[1] $
+\State $outputs[tag][word]++ $
+\State $transitions[prevTag][tag]++ $
+\EndFor
+\EndFor
+\State Normalize the Counts in $outputs$, $transitions$ to Probs
+\end{algorithmic}
+\end{algorithm}
+
+\section{Assignment Results}
+
+
+\section{Conclusion}
+
+
 
 \end{document}

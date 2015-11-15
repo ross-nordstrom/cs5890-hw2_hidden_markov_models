@@ -109,9 +109,9 @@ function _mult(a, b) {
 function round(x) {
     return _round(20, x);
 
-    return x < 0.6 ? _round(10, x) :
-        x < 0.9 ? _round(20, x) :
-            _round(100, x);
+    //return x < 0.6 ? _round(10, x) :
+    //    x < 0.9 ? _round(20, x) :
+    //        _round(100, x);
 }
 function _round(r, x) {
     return Math.round(x * r) / r;
