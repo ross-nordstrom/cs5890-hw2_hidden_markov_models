@@ -1,5 +1,7 @@
 #! /usr/bin/env node
 
+'use strict';
+
 var request = require('superagent');
 var async = require('async');
 var _ = require('underscore');
@@ -51,7 +53,7 @@ if (argv.help) {
     var labeledData = cliHelper.fileContent([dir, 'labeled.txt'].join('/')).trim().split('\n');
     //var unlabeledData = cliHelper.fileContent([dir, 'unlabeled.txt'].join('/')).split('\n');
 
-    var precisions = [];
+    var sentencePrecisions = [], tagPrecisions = [];
     _.each(_.range(0, num), function () {
         var partitioned = _.partition(_.shuffle(labeledData), cliHelper.inRange(0, ratio * _.size(labeledData)));
         var trainData = partitioned[0];
@@ -64,18 +66,28 @@ if (argv.help) {
             hmm.print();
         }
 
-        precisions.push(hmm.getPrecision());
+        sentencePrecisions.push(hmm.getSentencePrecision());
+        tagPrecisions.push(hmm.getTagPrecision());
     });
 
     if (!quiet) {
         console.log("\n-------------------------------------------------------------------\n");
     }
     console.log(clc.bold.cyan("Results from " + num + " iterations of the HMM:"));
-    console.log("\nPrecisions (freq by val): " + JSON.stringify(_.countBy(precisions.sort().reverse()), null, 2));
-    var mean = precisions.reduce(add) / num;
-    console.log("\nMean: " + clc.cyan(mean.toFixed(2)) + "," +
-        "  Min: " + clc.red(_.min(precisions).toFixed(2)) + "," +
-        "  Max: " + clc.green(_.max(precisions).toFixed(2)));
+
+    var sentPrecisionHistogram = _.countBy(sentencePrecisions.sort().reverse());
+    console.log("\nSentence Precisions (freq by val): " + JSON.stringify(sentPrecisionHistogram, null, 2));
+    var sentMean = sentencePrecisions.reduce(add) / num;
+    console.log("\nMean: " + clc.cyan(sentMean.toFixed(2)) + "," +
+        "  Min: " + clc.red(_.min(sentencePrecisions).toFixed(2)) + "," +
+        "  Max: " + clc.green(_.max(sentencePrecisions).toFixed(2)));
+
+    var tagPrecisionHistogram = _.countBy(tagPrecisions.map(round).sort().reverse());
+    console.log("\nTag Precisions (freq by val): " + JSON.stringify(tagPrecisionHistogram, null, 2));
+    var tagMean = tagPrecisions.reduce(add) / num;
+    console.log("\nMean: " + clc.cyan(tagMean.toFixed(2)) + "," +
+        "  Min: " + clc.red(_.min(tagPrecisions).toFixed(2)) + "," +
+        "  Max: " + clc.green(_.max(tagPrecisions).toFixed(2)));
 
 
     process.exit(1);
@@ -83,4 +95,13 @@ if (argv.help) {
 
 function add(a, b) {
     return a + b;
+}
+
+function round(x) {
+    return x < 0.6 ? _round(10, x) :
+        x < 0.9 ? _round(20, x) :
+            _round(100, x);
+}
+function _round(r, x) {
+    return Math.round(x * r) / r;
 }

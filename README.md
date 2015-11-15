@@ -31,28 +31,55 @@ npm install
 npm test
 ```
 
-### Results on "Full" Dataset
+### Results
+
+Example results after 10,000 iterations on the "Full" Dataset
 
 ```sh
-$ time rdnhmm  -i data/full/ -r .9 -n 10000 -q
+$ time rdnhmm -q -n 10000
 Results from 10000 iterations of the HMM:
 
-Precisions (freq by val): {
-  "1": 163,
-  "0.9": 838,
-  "0.8": 1963,
-  "0.7": 2620,
-  "0.6": 2313,
-  "0.5": 1399,
-  "0.4": 545,
-  "0.3": 127,
-  "0.2": 28,
-  "0.1": 4
+Sentence Precisions (freq by val): {
+  "1": 175,
+  "0.9": 888,
+  "0.8": 1961,
+  "0.7": 2671,
+  "0.6": 2247,
+  "0.5": 1349,
+  "0.4": 539,
+  "0.3": 145,
+  "0.2": 22,
+  "0.1": 3
 }
 
 Mean: 0.67,  Min: 0.10,  Max: 1.00
 
-real	0m31.544s
-user	0m31.632s
-sys	0m0.097s
+Tag Precisions (freq by val): {
+  "1": 199,
+  "0.97": 9,
+  "0.96": 616,
+  "0.95": 82,
+  "0.94": 1,
+  "0.93": 152,
+  "0.92": 667,
+  "0.91": 335,
+  "0.9": 1004,
+  "0.85": 1675,
+  "0.8": 1534,
+  "0.75": 1380,
+  "0.7": 888,
+  "0.65": 692,
+  "0.6": 500,
+  "0.5": 211,
+  "0.4": 48,
+  "0.3": 5,
+  "0.2": 1,
+  "0.1": 1
+}
+
+Mean: 0.80,  Min: 0.14,  Max: 1.00
+
+real	0m35.537s
+user	0m35.390s
+sys 	0m0.148s
 ```
